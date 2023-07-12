@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background: hsla(354, 55%, 63%, 1);
+
+    background: linear-gradient(
+        90deg,
+        hsla(354, 55%, 63%, 1) 0%,
+        hsla(266, 63%, 26%, 1) 100%,
+        hsla(31, 100%, 74%, 1) 100%
+    );
+
+    background: -moz-linear-gradient(
+        90deg,
+        hsla(354, 55%, 63%, 1) 0%,
+        hsla(266, 63%, 26%, 1) 100%,
+        hsla(31, 100%, 74%, 1) 100%
+    );
+
+    background: -webkit-linear-gradient(
+        90deg,
+        hsla(354, 55%, 63%, 1) 0%,
+        hsla(266, 63%, 26%, 1) 100%,
+        hsla(31, 100%, 74%, 1) 100%
+    );
+
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#D46C76", endColorstr="#3E196E", GradientType=1 );
+}
+
+.animated {
+    animation: 5s linear infinite book;
+}
+
+@keyframes book {
+    0% {
+        transform: translateX(-3px);
+    }
+
+    50% {
+        transform: translateX(3px);
+    }
+
+    100% {
+        transform: translateX(-3px);
+    }
+}
