@@ -5,6 +5,9 @@ import Book from "../components/Book/Book";
 
 import "../styles/bootstrap-custom.css";
 
+//! TODO
+//? 1. Переадресация на главную страницу, если пользователь авторизован.
+
 function WelcomePage() {
     const navigate = useNavigate();
     return (
@@ -16,7 +19,7 @@ function WelcomePage() {
                 <Button
                     size="lg"
                     onClick={() => navigate("/login")}
-                    className="w-40"
+                    className="w-auto"
                     variant="lighter-pink"
                 >
                     Sign in
@@ -25,6 +28,7 @@ function WelcomePage() {
                     size="lg"
                     onClick={() => navigate("/main")}
                     variant="pink"
+                    className="w-auto"
                 >
                     Skip registration
                 </Button>{" "}

@@ -5,6 +5,7 @@ import RegButton from "./RegButton";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Book from "../Book/Book";
+import { Col, Row } from "react-bootstrap";
 
 import "../../styles/bootstrap-custom.css";
 
@@ -13,24 +14,32 @@ import "../../styles/bootstrap-custom.css";
 
 interface IFormProps {
     title: string;
+    pageTitle: string;
+    handleSubmit: (email: string, password: string) => void;
 }
 
-function AuthForm({ title }: IFormProps) {
+function AuthForm({ title, handleSubmit, pageTitle }: IFormProps) {
     const navigate = useNavigate();
-    const [login, setLogin] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     return (
-        <div className="p-44">
+        <div className="pt-44 max-w-sm m-auto">
             <Book />
-            <Form className="w-96 m-auto">
+            <h1 className="text-center mt-2 text-lightest_pink">{pageTitle}</h1>
+            <Form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmit(email, password);
+                }}
+            >
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label className="text-creamy">
                         Email address
                     </Form.Label>
                     <Form.Control
-                        value={login}
-                        onChange={(e) => setLogin(e.target.value)}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         size="lg"
                         type="email"
                         placeholder="Enter email"
@@ -47,10 +56,10 @@ function AuthForm({ title }: IFormProps) {
                         placeholder="Password"
                     />
                 </Form.Group>
-                <div className="text-center mt-4">
+                <div className=" mt-4 flex justify-between">
                     <Button
                         type="submit"
-                        className="w-1/2"
+                        className="w-3/6"
                         variant="light-pink"
                         size="lg"
                     >
@@ -58,7 +67,7 @@ function AuthForm({ title }: IFormProps) {
                     </Button>{" "}
                     <Button
                         onClick={() => navigate("/")}
-                        className="w-44"
+                        className="w-5/12"
                         variant="lighter-pink"
                         size="lg"
                     >
