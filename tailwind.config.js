@@ -8,6 +8,7 @@ export default {
             pink: "#FF6666",
             light_pink: "#FF8989",
             lightest_pink: "#FCAEAE",
+            toggler: "rgba(71 85 105,0.8)",
         },
     },
     plugins: [],

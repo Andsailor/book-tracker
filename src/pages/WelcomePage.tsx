@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "react-bootstrap/Button";
@@ -10,6 +11,11 @@ import "../styles/bootstrap-custom.css";
 
 function WelcomePage() {
     const navigate = useNavigate();
+    useEffect(() => {
+        if (localStorage.getItem("email") !== null) {
+            navigate("/main");
+        }
+    });
     return (
         <div className="pt-48 text-center">
             <Book></Book>

@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import useValidation from "../../hooks/useValidation.hook";
 
 import RegButton from "./RegButton";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Book from "../Book/Book";
-import { Col, Row } from "react-bootstrap";
 
 import "../../styles/bootstrap-custom.css";
 
@@ -23,12 +23,16 @@ function AuthForm({ title, handleSubmit, pageTitle }: IFormProps) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const { validated, setValidated } = useValidation();
+
     return (
         <div className="pt-44 max-w-sm m-auto">
             <Book />
             <h1 className="text-center mt-2 text-lightest_pink">{pageTitle}</h1>
             <Form
+                validated={validated}
                 onSubmit={(e) => {
+                    setValidated(false);
                     e.preventDefault();
                     handleSubmit(email, password);
                 }}
@@ -38,8 +42,13 @@ function AuthForm({ title, handleSubmit, pageTitle }: IFormProps) {
                         Email address
                     </Form.Label>
                     <Form.Control
+                        className="valid:bg-creamy"
+                        required
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => {
+                            setValidated(true);
+                            setEmail(e.target.value);
+                        }}
                         size="lg"
                         type="email"
                         placeholder="Enter email"
@@ -49,8 +58,13 @@ function AuthForm({ title, handleSubmit, pageTitle }: IFormProps) {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label className="text-creamy">Password</Form.Label>
                     <Form.Control
+                        className="valid:bg-creamy"
+                        required
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => {
+                            setValidated(true);
+                            setPassword(e.target.value);
+                        }}
                         size="lg"
                         type="password"
                         placeholder="Password"

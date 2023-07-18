@@ -1,60 +1,61 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth.hook";
 
 import { Navbar, Container, Image } from "react-bootstrap";
+import SearchForm from "./SearchForm";
+import LoggedUserBurger from "./LoggedContent/LoggedUserBurger";
 
 import heart from "../../assets/heart.png";
+import logout from "../../assets/logout.png";
 
 //! TODO
 //? 1. Продумать UI навбара.
 //? 2. Пока в голову приходят только вкладки по типу "избранное", "популярное"
-//? 3. Реализовать логику выхода из аккаунта
-//? 4. Подумать, как заставить страницу реагировать на изменение localstorage
+//? 3. Рефакторинг, дробление на более маленькие частицы
 
 function NavBar() {
+    const [hidden, setHidden] = useState(false);
     const navigate = useNavigate();
-    const { logOut, isLoged, login } = useAuth();
+    const { logOut, isLogged } = useAuth();
 
-    const loggedUserEmail = isLoged ? (
-        <span className="text-lightest_pink text-xl">
-            <span className="text-light_pink">{login}</span> |{" "}
-            <span
-                className="cursor-pointer text-pink hover:text-creamy transition-all duration-300"
-                onClick={() => {
-                    logOut();
-                    window.location.reload();
-                }}
-            >
-                Sign out
-            </span>
-        </span>
-    ) : (
-        <span
-            onClick={() => navigate("/login")}
-            className="text-lightest_pink text-xl cursor-pointer hover:text-pink  transition-all duration-300"
-        >
-            Sign in
-        </span>
-    );
     return (
-        <Navbar expand="lg" className="bg-inherit">
-            <Container>
-                <Navbar.Brand
-                    className="cursor-pointer"
-                    onClick={() => navigate("/main")}
-                >
-                    <span className="text-lightest_pink text-3xl flex hover:text-light_pink transition-all">
-                        <span className="mr-2">We</span>
-                        <Image className="w-10" src={heart} />
-                        <span className="ml-2">Books</span>
-                    </span>
-                </Navbar.Brand>
-                <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-end">
-                    <Navbar.Text>{loggedUserEmail}</Navbar.Text>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+        <>
+            <Navbar expand="lg" className="bg-inherit">
+                <Container>
+                    <Navbar.Brand
+                        className="cursor-pointer"
+                        onClick={() => navigate("/main")}
+                    >
+                        <span className="text-lightest_pink md:text-2xl lg:text-3xl flex hover:text-light_pink transition-all">
+                            <span className="mr-2 md:hidden min-[992px]:block">
+                                We
+                            </span>
+                            <Image
+                                className=" md:w-11 md:h-9 lg:w-10 lg:h-8"
+                                src={heart}
+                            />
+                            <span className="ml-2 md:hidden min-[992px]:block">
+                                Books
+                            </span>
+                        </span>
+                    </Navbar.Brand>
+                    <SearchForm />
+                    <LoggedUserBurger setHidden={setHidden} />
+                    {!hidden && isLogged && (
+                        <Image
+                            onClick={() => {
+                                logOut();
+                                window.location.reload();
+                            }}
+                            className="w-8 min-[992px]:hidden"
+                            src={logout}
+                        />
+                    )}
+                </Container>
+            </Navbar>
+            <Outlet />
+        </>
     );
 }
 

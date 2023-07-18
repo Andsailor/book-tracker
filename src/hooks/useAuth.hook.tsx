@@ -21,7 +21,7 @@ const useAuth = () => {
     };
 
     return {
-        isLoged: login !== null,
+        isLogged: login !== null,
         logIn,
         logOut,
         login,

@@ -1,12 +1,14 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth.hook";
+import useValidation from "../../hooks/useValidation.hook";
 
 import AuthForm from "../Form/AuthForm";
 
 function Login() {
     const navigate = useNavigate();
     const { logIn } = useAuth();
+
     const signIn = async (email: string, password: string) => {
         const auth = getAuth();
         await signInWithEmailAndPassword(auth, email, password)
@@ -17,8 +19,10 @@ function Login() {
                 );
                 navigate("/main");
             })
-            .catch((error) => {
-                console.log(error);
+            .catch((error: { [key: string]: string }) => {
+                if ("message" in error) {
+                    navigate("/error");
+                }
             });
     };
     return <AuthForm handleSubmit={signIn} title="Login" pageTitle="Sign in" />;

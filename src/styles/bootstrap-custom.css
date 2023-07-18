@@ -49,3 +49,9 @@
 .form-control:focus {
     background: #fcaeae;
 }
+
+/* !navbar */
+.navbar-toggler {
+    background: rgba(252, 174, 174, 0.8);
+    border: 1px solid #fcaeae;
+}
