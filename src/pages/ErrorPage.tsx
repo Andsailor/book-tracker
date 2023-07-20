@@ -1,14 +1,5 @@
-import useValidation from "../hooks/useValidation.hook";
-
 function ErrorPage() {
-    const { errorCode } = useValidation();
-    console.log(errorCode);
-    return (
-        <div>
-            Oups...
-            {errorCode}
-        </div>
-    );
+    return <div>Oups</div>;
 }
 
 export default ErrorPage;

@@ -17,9 +17,9 @@ function WelcomePage() {
         }
     });
     return (
-        <div className="pt-48 text-center">
+        <div className="max-[768px]:pt-28 pt-48 text-center">
             <Book></Book>
-            <h1 className="text-lightest_pink">We love Books</h1>
+            <h1 className="text-lightest_pink mt-4">We love Books</h1>
             <p className="text-xl text-lightest_pink">Book-tracking App</p>
             <div>
                 <Button
@@ -34,7 +34,7 @@ function WelcomePage() {
                     size="lg"
                     onClick={() => navigate("/main")}
                     variant="pink"
-                    className="w-auto"
+                    className="w-auto lg:hover:none max-[356px]:mt-4"
                 >
                     Skip registration
                 </Button>{" "}

@@ -35,6 +35,20 @@
     border: 1px solid #fcaeae;
 }
 
+@media (max-width: 1024px) {
+    .btn-pink:hover {
+        background-color: #ff6666;
+    }
+
+    .btn-light-pink:hover {
+        background-color: #ff8989;
+    }
+
+    .btn-lighter-pink:hover {
+        background-color: #fcaeae;
+    }
+}
+
 /* !forms */
 .form-control {
     transition: 0.3s all;

@@ -11,8 +11,7 @@ function Registration() {
     const createNewUser = async (email: string, password: string) => {
         const auth = getAuth();
         await createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                console.log(userCredential);
+            .then(() => {
                 navigate("/login");
             })
             .catch((e) => console.log(e));

@@ -13,7 +13,6 @@ import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 
 import git from "./assets/logo.png";
-import { Row, Col } from "react-bootstrap";
 
 //!TODO
 //? 1.Вложенный роутинг

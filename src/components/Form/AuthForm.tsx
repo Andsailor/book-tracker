@@ -26,9 +26,9 @@ function AuthForm({ title, handleSubmit, pageTitle }: IFormProps) {
     const { validated, setValidated } = useValidation();
 
     return (
-        <div className="pt-44 max-w-sm m-auto">
+        <div className="max-[1024px]:pt-12 pt-44 max-w-sm m-auto">
             <Book />
-            <h1 className="text-center mt-2 text-lightest_pink">{pageTitle}</h1>
+            <h1 className="text-center mt-3 text-lightest_pink">{pageTitle}</h1>
             <Form
                 validated={validated}
                 onSubmit={(e) => {

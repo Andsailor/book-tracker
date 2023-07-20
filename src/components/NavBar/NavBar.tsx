@@ -1,46 +1,35 @@
 import { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth.hook";
 
 import { Navbar, Container, Image } from "react-bootstrap";
 import SearchForm from "./SearchForm";
 import LoggedUserBurger from "./LoggedContent/LoggedUserBurger";
+import NavBarLogo from "./NavBarLogo";
 
-import heart from "../../assets/heart.png";
 import logout from "../../assets/logout.png";
-
-//! TODO
-//? 1. Продумать UI навбара.
-//? 2. Пока в голову приходят только вкладки по типу "избранное", "популярное"
-//? 3. Рефакторинг, дробление на более маленькие частицы
 
 function NavBar() {
     const [hidden, setHidden] = useState(false);
-    const navigate = useNavigate();
     const { logOut, isLogged } = useAuth();
+
+    //? перенёс сюда поиск, чтобы попробовать вынести его за пределы навбара для мобильных устройств
+    const authorizedUserFormStyle =
+        "max-[767px]:hidden md:w-8/12 md:ml-0 min-[992px]:w-4/12  min-[992px]:ml-7 min-[1200px]:w-5/12 xl:w-5/12 2xl:ml-16";
+    const unauthorizedUserFormStyle =
+        "max-[767px]:hidden md:w-8/12 md:ml-0 min-[992px]:w-6/12  min-[992px]:ml-0 min-[1200px]:w-7/12 xl:w-7/12";
+
+    const style = isLogged
+        ? authorizedUserFormStyle
+        : unauthorizedUserFormStyle;
 
     return (
         <>
             <Navbar expand="lg" className="bg-inherit">
                 <Container>
-                    <Navbar.Brand
-                        className="cursor-pointer"
-                        onClick={() => navigate("/main")}
-                    >
-                        <span className="text-lightest_pink md:text-2xl lg:text-3xl flex hover:text-light_pink transition-all">
-                            <span className="mr-2 md:hidden min-[992px]:block">
-                                We
-                            </span>
-                            <Image
-                                className=" md:w-11 md:h-9 lg:w-10 lg:h-8"
-                                src={heart}
-                            />
-                            <span className="ml-2 md:hidden min-[992px]:block">
-                                Books
-                            </span>
-                        </span>
-                    </Navbar.Brand>
-                    <SearchForm />
+                    <NavBarLogo />
+                    <div className={style}>
+                        <SearchForm />
+                    </div>
                     <LoggedUserBurger setHidden={setHidden} />
                     {!hidden && isLogged && (
                         <Image
@@ -48,13 +37,12 @@ function NavBar() {
                                 logOut();
                                 window.location.reload();
                             }}
-                            className="w-8 min-[992px]:hidden"
+                            className="w-10 max-[767px]:hidden min-[992px]:hidden"
                             src={logout}
                         />
                     )}
                 </Container>
             </Navbar>
-            <Outlet />
         </>
     );
 }
