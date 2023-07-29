@@ -2,12 +2,9 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "react-bootstrap/Button";
-import Book from "../components/Book/Book";
+import BookIcon from "../components/BookIcon/BookIcon";
 
 import "../styles/bootstrap-custom.css";
-
-//! TODO
-//? 1. Переадресация на главную страницу, если пользователь авторизован.
 
 function WelcomePage() {
     const navigate = useNavigate();
@@ -18,7 +15,7 @@ function WelcomePage() {
     });
     return (
         <div className="max-[768px]:pt-28 pt-48 text-center">
-            <Book></Book>
+            <BookIcon />
             <h1 className="text-lightest_pink mt-4">We love Books</h1>
             <p className="text-xl text-lightest_pink">Book-tracking App</p>
             <div>

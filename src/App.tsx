@@ -9,8 +9,8 @@ import {
 } from "./pages/Pages";
 import BooksToRead from "./components/Content/BooksToRead";
 import BooksDone from "./components/Content/BooksDone";
-import Container from "react-bootstrap/Container";
-import Image from "react-bootstrap/Image";
+import BooksSearchResult from "./components/Content/BooksSearchResult";
+import { Container, Image } from "react-bootstrap";
 
 import git from "./assets/logo.png";
 
@@ -19,13 +19,14 @@ import git from "./assets/logo.png";
 
 function App() {
     return (
-        <Container className="bg-main font-mono h-screen relative p-2">
+        <Container className="bg-main font-mono min-h-screen relative p-2">
             <Routes>
                 <Route path="/" element={<WelcomePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/main" element={<MainPage />}>
                     <Route path="toread" element={<BooksToRead />} />
                     <Route path="done" element={<BooksDone />} />
+                    <Route path="result" element={<BooksSearchResult />} />
                 </Route>
                 <Route path="/registration" element={<RegisterPage />} />
                 <Route path="/error" element={<ErrorPage />} />

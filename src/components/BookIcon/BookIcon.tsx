@@ -2,8 +2,8 @@ import Image from "react-bootstrap/Image";
 
 import book from "../../assets/book.png";
 
-function Book() {
+function BookIcon() {
     return <Image className="w-20 m-auto animated" src={book} rounded />;
 }
 
-export default Book;
+export default BookIcon;

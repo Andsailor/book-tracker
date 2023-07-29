@@ -1,5 +1,5 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux/es/exports";
 import { BrowserRouter } from "react-router-dom";
 import "./firebase.tsx";
 
@@ -8,10 +8,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import App from "./App.tsx";
 
+import { store } from "../src/store/store.ts";
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <React.StrictMode>
+    <Provider store={store}>
         <BrowserRouter>
             <App />
         </BrowserRouter>
-    </React.StrictMode>
+    </Provider>
 );

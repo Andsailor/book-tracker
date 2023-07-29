@@ -3,9 +3,6 @@ import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar/NavBar";
 import SearchForm from "../components/NavBar/SearchForm";
 
-//! TODO
-//? 1. Продумать логику приватности и функционал, который будет доступен пользователю без регистрации.
-
 function MainPage() {
     return (
         <div>

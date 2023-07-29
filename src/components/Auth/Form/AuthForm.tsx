@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import useValidation from "../../hooks/useValidation.hook";
+import useValidation from "../../../hooks/useValidation.hook";
 
 import RegButton from "./RegButton";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Book from "../Book/Book";
+import BookIcon from "../../BookIcon/BookIcon";
 
-import "../../styles/bootstrap-custom.css";
+import "../../../styles/bootstrap-custom.css";
 
 //! TODO
 //? 2. Валидировать форму
@@ -27,7 +27,7 @@ function AuthForm({ title, handleSubmit, pageTitle }: IFormProps) {
 
     return (
         <div className="max-[1024px]:pt-12 pt-44 max-w-sm m-auto">
-            <Book />
+            <BookIcon />
             <h1 className="text-center mt-3 text-lightest_pink">{pageTitle}</h1>
             <Form
                 validated={validated}
@@ -54,7 +54,6 @@ function AuthForm({ title, handleSubmit, pageTitle }: IFormProps) {
                         placeholder="Enter email"
                     />
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label className="text-creamy">Password</Form.Label>
                     <Form.Control
