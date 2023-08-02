@@ -1,6 +1,6 @@
 import useAuth from "../../../hooks/useAuth.hook";
 
-import { Button, Card } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 
 import emptyStar from "../../../assets/emptystar.png";
 
@@ -27,69 +27,47 @@ function BookCard({ title, image, authors, subtitle, categories }: IBookCard) {
             : authors;
 
     const bookTitle =
-        title && title.length > 60 ? title.slice(0, 60) + "..." : title;
+        title && title.length > 100 ? title.slice(0, 100) + "..." : title;
     return (
-        <div>
-            <Card
-                style={{
-                    width: "24rem",
-                    minHeight: "34rem",
-                    backgroundColor: "rgba(250, 250, 250, .2)",
-                }}
-            >
-                <Card.Img
-                    className="max-w-sm max-h-60 p-2"
-                    variant="top"
-                    src={image}
-                />
-                <Card.Body>
-                    <Card.Title>
-                        <span className="text-lg bold">{bookTitle}</span>
-                    </Card.Title>
-                    <Card.Title>
-                        {categories && (
-                            <span className="text-sm">
-                                <span className="text-base bold text-light_pink">
-                                    Category:
-                                </span>{" "}
-                                {categories}
-                            </span>
-                        )}
-                    </Card.Title>
-                    <Card.Title>
-                        {subtitle && (
-                            <span className="text-sm">
-                                <span className="text-base bold text-light_pink">
-                                    About:
-                                </span>{" "}
-                                {subtitle}
-                            </span>
-                        )}
-                    </Card.Title>
-                    <Card.Text>
-                        {authors && (
-                            <span>
-                                <span className="bold text-light_pink">
-                                    Author:{" "}
-                                </span>
-                                {author}
-                            </span>
-                        )}
-                    </Card.Text>
-                    <div className="absolute bottom-5 w-11/12 d-flex justify-between">
-                        <Button variant="lighter-pink">Go somewhere</Button>
-                        {isLogged && (
-                            <button>
-                                <img
-                                    className="w-10"
-                                    src={emptyStar}
-                                    alt="add to read list button"
-                                />
-                            </button>
-                        )}
-                    </div>
-                </Card.Body>
-            </Card>
+        <div className="xl:flex justify-between w-full p-10 max-[1024px]:p-4 max-[1024px]:text-center border-pink border-opacity-50 border-b-2 text-white text-opacity-75 shadow-lg">
+            <div className="block xl:flex">
+                <div>
+                    <Image
+                        className="w-28 max-[1024px]:m-auto max-[1024px]:w-1/2 max-[1024px]:mb-4"
+                        src={image}
+                        alt="book cover image"
+                    />
+                </div>
+                <div className="ml-10 max-[1024px]:ml-0 max-w-3xl">
+                    <p className="text-2xl font-bold text-pink max-[400px]:text-lg">
+                        {bookTitle}
+                    </p>
+                    {subtitle && (
+                        <p className="text-lg max-[400px]:text-sm">
+                            {subtitle}
+                        </p>
+                    )}
+                    {authors && (
+                        <p className="max-[400px]:text-sm">author: {author}</p>
+                    )}
+                    {categories && (
+                        <p className="max-[400px]:text-sm">
+                            category: {categories}
+                        </p>
+                    )}
+                </div>
+            </div>
+            <div className="d-flex justify-end items-end max-[1024px]:justify-center max-[1024px]:mt-8">
+                <Button className="w-20" variant="pink mx-2">
+                    About
+                </Button>
+                {isLogged && (
+                    <Image
+                        className="transition-all w-8 ml-2 mb-1 cursor-pointer hover:w-9 hover:ml-1"
+                        src={emptyStar}
+                    />
+                )}
+            </div>
         </div>
     );
 }

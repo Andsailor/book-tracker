@@ -1,83 +1,88 @@
-import { useGetBookByNameQuery } from "../../store/booksApi";
-import { useAppSelector } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { useHttp } from "../../services/useHttp.hook";
+import {
+    setMoreBooksToState,
+    setSearchStartIndex,
+} from "../../store/slices/booksSlice";
 
 import { Spinner, Button } from "react-bootstrap";
 import BookCard from "./BookCard/BookCard";
-import BooksPagination from "./BooksPagination/Pagination";
 
 import imageNotFound from "../../assets/noimg.jpg";
 
-//!TODO
-//? 1. Заполнить карточки данными из АПИ
+import type { ISearchParams } from "../../types/types";
+
+//! TODO:
+//? 1. Перенаправление на главную страницу, если не выполняется поиск и массив книг пуст.
 
 function BooksSearchResult() {
-    const { bookToSearch, isSkipSearching, bookSearchStartIndex } =
-        useAppSelector((state) => state.books);
+    const books = useAppSelector((store) => store.books.books);
+    const bookName = useAppSelector((store) => store.books.bookName);
+    const booksOrder = useAppSelector((store) => store.books.booksOrder);
+    const isLoading = useAppSelector((store) => store.books.isLoading);
+    const isError = useAppSelector((store) => store.books.isError);
+    const searchIndex = useAppSelector((store) => store.books.searchStartIndex);
 
-    const bookSearchParams = {
-        name: bookToSearch,
-        startIndex: bookSearchStartIndex,
-    };
+    const dispatch = useAppDispatch();
+    const { getBooks } = useHttp();
 
-    const { data, isLoading, isFetching } = useGetBookByNameQuery(
-        bookSearchParams,
-        {
-            skip: isSkipSearching,
-        }
-    );
-
-    console.log(data);
+    function getMoreBooks(params: ISearchParams) {
+        getBooks({
+            bookName: params.bookName,
+            startIndex: params.startIndex,
+            booksOrder: params.booksOrder,
+        })
+            .then((response) => {
+                if (response) {
+                    dispatch(setMoreBooksToState(response.data.items));
+                }
+            })
+            .catch((e) => console.log(e))
+            .finally(() => dispatch(setSearchStartIndex(searchIndex + 10)));
+    }
 
     const content =
-        isLoading || isFetching ? (
+        isLoading && !isError && !books ? (
             <div className="d-flex justify-center mt-52">
                 <Spinner />
             </div>
         ) : (
             <div className="d-flex flex-wrap gap-5 justify-between mt-10">
-                {data?.items.map((item) => (
-                    <BookCard
-                        key={item.id}
-                        title={item.volumeInfo.title}
-                        authors={item.volumeInfo.authors}
-                        subtitle={item.volumeInfo.subtitle}
-                        categories={item.volumeInfo.categories}
-                        image={
-                            item.volumeInfo.imageLinks?.thumbnail ||
-                            imageNotFound
-                        }
-                    />
-                ))}
+                {books &&
+                    books.map((item) => (
+                        <BookCard
+                            key={item.id}
+                            title={item.volumeInfo.title}
+                            authors={item.volumeInfo.authors}
+                            subtitle={item.volumeInfo.subtitle}
+                            categories={item.volumeInfo.categories}
+                            image={
+                                item.volumeInfo.imageLinks?.thumbnail ||
+                                imageNotFound
+                            }
+                        />
+                    ))}
             </div>
         );
     return (
-        <div className="pb-32">
-            <div className="text-center mt-3 text-2xl text-lightest_pink">
-                Books at all:{" "}
-                {data?.totalItems && data?.totalItems > 500
-                    ? 500
-                    : data?.totalItems}
-            </div>
+        <div className="pb-32 md:px-5">
+            <div>{}</div>
             {content}
-            <div className="flex justify-center mt-14">
-                {/* <Button
+            <div className="mt-5 text-center">
+                <Button
                     onClick={() => {
-                        setMaxBooksToSearch(
-                            (maxBooksToSearch) => maxBooksToSearch + 9
-                        );
+                        getMoreBooks({
+                            bookName,
+                            startIndex: searchIndex,
+                            booksOrder,
+                        });
                     }}
-                    variant="light-pink"
-                    className="mt-14"
+                    size="lg"
+                    variant="lighter-pink"
+                    disabled={isLoading}
                 >
-                    Find More Books
-                </Button> */}
-                <BooksPagination
-                    totalBooksCount={
-                        data?.totalItems && data?.totalItems > 500
-                            ? 500
-                            : data?.totalItems
-                    }
-                />
+                    {isLoading ? "Loading..." : "load more"}
+                </Button>
             </div>
         </div>
     );

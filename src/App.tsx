@@ -14,9 +14,6 @@ import { Container, Image } from "react-bootstrap";
 
 import git from "./assets/logo.png";
 
-//!TODO
-//? 1.Вложенный роутинг
-
 function App() {
     return (
         <Container className="bg-main font-mono min-h-screen relative p-2">

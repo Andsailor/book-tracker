@@ -12,7 +12,8 @@ export interface ISingleBook {
     };
 }
 
-export interface IGetBooksQueryParams {
-    name: string;
-    startIndex: string | number;
+export interface ISearchParams {
+    bookName: string;
+    startIndex: number;
+    booksOrder?: string;
 }

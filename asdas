@@ -1,0 +1,29 @@
+[33mcommit 85c4e53d80abcc2db6c4e3596f4229d8e151cebe[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Andrei Potapov <iccupspecialfor@gmail.com>
+Date:   Sat Jul 29 11:29:53 2023 +0300
+
+    Changing API logic due to Google API issues. RTK Query to Axios
+
+[33mcommit e9ca635e51db9c1ca693be4156d6acb0227349aa[m
+Author: Andrei Potapov <iccupspecialfor@gmail.com>
+Date:   Thu Jul 20 14:19:17 2023 +0300
+
+    completed navbar, login, welcom page adaptation
+
+[33mcommit 6f79cbec8264d5c661904b33b391beba472e40f7[m
+Author: Andrei Potapov <iccupspecialfor@gmail.com>
+Date:   Tue Jul 18 14:51:02 2023 +0300
+
+    auth ready, working on responsive design
+
+[33mcommit 90b8a39f6b2d34416444fe2db7c628122e6a09d5[m
+Author: Andrei Potapov <iccupspecialfor@gmail.com>
+Date:   Sat Jul 15 10:29:38 2023 +0300
+
+    commit before applying ui changes
+
+[33mcommit 15433a0562ce6d521e6f401a492ca378dfb23d7a[m
+Author: Andrei Potapov <iccupspecialfor@gmail.com>
+Date:   Wed Jul 12 13:56:17 2023 +0300
+
+    book-track app welcome page ready
