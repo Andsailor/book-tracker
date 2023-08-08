@@ -9,6 +9,7 @@ export default {
             light_pink: "#FF8989",
             lightest_pink: "#FCAEAE",
             white: "#FFF",
+            black: "#000",
         },
     },
     plugins: [],

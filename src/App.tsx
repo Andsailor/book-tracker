@@ -7,8 +7,8 @@ import {
     WelcomePage,
     ErrorPage,
 } from "./pages/Pages";
+import AboutBook from "./components/Content/AboutBook";
 import BooksToRead from "./components/Content/BooksToRead";
-import BooksDone from "./components/Content/BooksDone";
 import BooksSearchResult from "./components/Content/BooksSearchResult";
 import { Container, Image } from "react-bootstrap";
 
@@ -22,8 +22,8 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/main" element={<MainPage />}>
                     <Route path="toread" element={<BooksToRead />} />
-                    <Route path="done" element={<BooksDone />} />
                     <Route path="result" element={<BooksSearchResult />} />
+                    <Route path="result/:title" element={<AboutBook />} />
                 </Route>
                 <Route path="/registration" element={<RegisterPage />} />
                 <Route path="/error" element={<ErrorPage />} />

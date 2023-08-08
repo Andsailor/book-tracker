@@ -7,7 +7,7 @@ interface ILoggedUserInfo {
 
 function LoggedUserInfo({ login, logOut }: ILoggedUserInfo) {
     return (
-        <span className="text-lightest_pink text-xl d-flex items-center">
+        <span className="text-lightest_pink text-lg d-flex items-center">
             <span className="text-light_pink mr-2">{login}</span> |{" "}
             <span
                 className="cursor-pointer text-pink hover:text-creamy transition-all duration-300"

@@ -12,9 +12,8 @@ function NavBar() {
     const [hidden, setHidden] = useState(false);
     const { logOut, isLogged } = useAuth();
 
-    //? перенёс сюда поиск, чтобы попробовать вынести его за пределы навбара для мобильных устройств
     const authorizedUserFormStyle =
-        "max-[767px]:hidden md:w-8/12 md:ml-0 min-[992px]:w-4/12  min-[992px]:ml-7 min-[1200px]:w-5/12 xl:w-5/12 2xl:ml-16";
+        "max-[767px]:hidden md:w-8/12 md:ml-0 min-[992px]:w-5/12  min-[992px]:ml-7 min-[1200px]:w-3/8 xl:w-5/12 2xl:ml-16";
     const unauthorizedUserFormStyle =
         "max-[767px]:hidden md:w-8/12 md:ml-0 min-[992px]:w-6/12  min-[992px]:ml-0 min-[1200px]:w-7/12 xl:w-7/12";
 

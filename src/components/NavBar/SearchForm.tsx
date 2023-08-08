@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { useNavigate } from "react-router-dom";
-import type { ISearchParams } from "../../types/types";
+import type { ISearchParams, ISingleBook } from "../../types/types";
 
 import {
     setBooksToState,
@@ -30,9 +30,13 @@ function SearchForm() {
         })
             .then(
                 (response) =>
-                    response && dispatch(setBooksToState(response.data.items))
+                    response &&
+                    dispatch(
+                        setBooksToState(response.data.items as ISingleBook[])
+                    )
             )
-            .catch((e) => console.log(e));
+            .catch((e) => console.log(e))
+            .finally(() => setBookName(""));
     }
 
     return (
@@ -45,7 +49,7 @@ function SearchForm() {
                     booksOrder: booksOrder,
                 });
             }}
-            className="d-flex w-full sm:hidden"
+            className="d-flex w-full sm:hidden relative"
         >
             <Form.Control
                 type="search"
@@ -57,7 +61,7 @@ function SearchForm() {
             />
             <select
                 onChange={(e) => dispatch(setBooksOrder(e.target.value))}
-                className="p-2 h-10 rounded-md bg-lightest_pink border-1 border-lightest_pink "
+                className="min-[992px]:w-26 p-2 h-10 text-sm rounded-md bg-lightest_pink border-1 border-lightest_pink absolute right-24"
             >
                 <option value="relevance">Relevance</option>
                 <option value="newest">Newest</option>

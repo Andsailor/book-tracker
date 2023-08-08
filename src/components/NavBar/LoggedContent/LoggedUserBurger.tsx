@@ -26,7 +26,7 @@ function LoggedUserBurger({ setHidden }: ILoggedUserBurger) {
             <Navbar.Toggle
                 onClick={() => setHidden((value) => (value = !value))}
             />
-            <Navbar.Collapse className="justify-end">
+            <Navbar.Collapse className="justify-around">
                 {loggedNavigation}
                 <Navbar.Text>{loggedUserEmail}</Navbar.Text>
             </Navbar.Collapse>

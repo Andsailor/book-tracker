@@ -1,24 +1,36 @@
 import useAuth from "../../../hooks/useAuth.hook";
 
+import { Link } from "react-router-dom";
 import { Button, Image } from "react-bootstrap";
 
 import emptyStar from "../../../assets/emptystar.png";
+import star from "../../../assets/star.png";
 
 interface IBookCard {
     key: string;
     title: string;
     image: string | undefined;
+    starIcon: "star" | "emptyStar";
     authors: string[] | null;
     subtitle: string | null;
     categories: string[] | null;
+    description?: string;
+    modifyBooksToReadList?: () => void;
+    setAboutBookPageContent: () => void;
+    routeLink?: string;
 }
 
-//! TODO
-//? 1. Логика добавления в список к прочтению.
-//? 2. Изменение значка звёздочки при добавлении в список.
-//? 3. Адаптация под мобилки.
-
-function BookCard({ title, image, authors, subtitle, categories }: IBookCard) {
+function BookCard({
+    title,
+    image,
+    authors,
+    subtitle,
+    categories,
+    modifyBooksToReadList,
+    setAboutBookPageContent,
+    starIcon,
+    routeLink,
+}: IBookCard) {
     const { isLogged } = useAuth();
 
     const author: string | string[] | null =
@@ -28,9 +40,13 @@ function BookCard({ title, image, authors, subtitle, categories }: IBookCard) {
 
     const bookTitle =
         title && title.length > 100 ? title.slice(0, 100) + "..." : title;
+
+    const routerLinkForAboutButton = routeLink
+        ? `${routeLink}/${title}`
+        : title;
     return (
         <div className="xl:flex justify-between w-full p-10 max-[1024px]:p-4 max-[1024px]:text-center border-pink border-opacity-50 border-b-2 text-white text-opacity-75 shadow-lg">
-            <div className="block xl:flex">
+            <div className="block lg:flex">
                 <div>
                     <Image
                         className="w-28 max-[1024px]:m-auto max-[1024px]:w-1/2 max-[1024px]:mb-4"
@@ -58,13 +74,26 @@ function BookCard({ title, image, authors, subtitle, categories }: IBookCard) {
                 </div>
             </div>
             <div className="d-flex justify-end items-end max-[1024px]:justify-center max-[1024px]:mt-8">
-                <Button className="w-20" variant="pink mx-2">
-                    About
+                <Button
+                    onClick={setAboutBookPageContent}
+                    className="w-20"
+                    variant="pink mx-2"
+                >
+                    <Link
+                        className="text-creamy no-underline"
+                        to={routerLinkForAboutButton}
+                    >
+                        About
+                    </Link>
                 </Button>
                 {isLogged && (
                     <Image
+                        onClick={() =>
+                            typeof modifyBooksToReadList !== "undefined" &&
+                            modifyBooksToReadList()
+                        }
                         className="transition-all w-8 ml-2 mb-1 cursor-pointer hover:w-9 hover:ml-1"
-                        src={emptyStar}
+                        src={starIcon === "star" ? star : emptyStar}
                     />
                 )}
             </div>

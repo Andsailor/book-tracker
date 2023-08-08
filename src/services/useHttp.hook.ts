@@ -21,7 +21,7 @@ export const useHttp = () => {
             const response = await instance.get<IAxiosGetBook>(
                 `?q=${params.bookName}
                 &startIndex=${params.startIndex}&orderBy=${
-                    params.booksOrder
+                    params.booksOrder as string
                 }&key=${import.meta.env.VITE_GOOGLE_BOOKS_API_KEY as string}`
             );
 

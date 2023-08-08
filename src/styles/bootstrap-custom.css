@@ -65,7 +65,8 @@
 }
 
 .form-control:focus {
-    background: #fcaeae;
+    background: rgba(255, 234, 221, 0.8);
+    border: 2px solid pink;
 }
 
 /* !navbar */

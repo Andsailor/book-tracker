@@ -6,19 +6,23 @@ import type { ISingleBook } from "../../types/types";
 interface IBookSlice {
     bookName: string;
     books: null | ISingleBook[];
+    booksToRead: ISingleBook[];
     booksOrder: string;
     searchStartIndex: number;
     isLoading: boolean;
     isError: boolean;
+    aboutBookPageContent: ISingleBook | null;
 }
 
 const initialState: IBookSlice = {
     bookName: "",
-    searchStartIndex: 10,
-    booksOrder: "relevance",
     books: null,
+    booksToRead: [],
+    booksOrder: "relevance",
+    searchStartIndex: 10,
     isLoading: false,
     isError: false,
+    aboutBookPageContent: null,
 };
 
 const bookSlice = createSlice({
@@ -48,6 +52,19 @@ const bookSlice = createSlice({
         setSearchStartIndex(state, action: PayloadAction<number>) {
             state.searchStartIndex = action.payload;
         },
+        setBookToReadList(state, action: PayloadAction<ISingleBook>) {
+            state.booksToRead = state.booksToRead.concat(action.payload);
+        },
+        removeBookFromReadList(state, action: PayloadAction<string>) {
+            if (state.booksToRead.length > 0) {
+                state.booksToRead = state.booksToRead.filter(
+                    (item) => item.id !== action.payload
+                );
+            }
+        },
+        setAboutBookPageContent(state, action: PayloadAction<ISingleBook>) {
+            state.aboutBookPageContent = action.payload;
+        },
     },
 });
 
@@ -59,5 +76,8 @@ export const {
     setSearchStartIndex,
     setMoreBooksToState,
     setBooksOrder,
+    setBookToReadList,
+    removeBookFromReadList,
+    setAboutBookPageContent,
 } = bookSlice.actions;
 export default bookSlice.reducer;

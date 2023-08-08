@@ -3,14 +3,18 @@ import { useHttp } from "../../services/useHttp.hook";
 import {
     setMoreBooksToState,
     setSearchStartIndex,
+    setBookToReadList,
+    removeBookFromReadList,
+    setAboutBookPageContent,
 } from "../../store/slices/booksSlice";
+import { v4 as uuidv4 } from "uuid";
 
 import { Spinner, Button } from "react-bootstrap";
 import BookCard from "./BookCard/BookCard";
 
 import imageNotFound from "../../assets/noimg.jpg";
 
-import type { ISearchParams } from "../../types/types";
+import type { ISearchParams, ISingleBook } from "../../types/types";
 
 //! TODO:
 //? 1. Перенаправление на главную страницу, если не выполняется поиск и массив книг пуст.
@@ -22,6 +26,7 @@ function BooksSearchResult() {
     const isLoading = useAppSelector((store) => store.books.isLoading);
     const isError = useAppSelector((store) => store.books.isError);
     const searchIndex = useAppSelector((store) => store.books.searchStartIndex);
+    const booksToReadList = useAppSelector((store) => store.books.booksToRead);
 
     const dispatch = useAppDispatch();
     const { getBooks } = useHttp();
@@ -34,7 +39,11 @@ function BooksSearchResult() {
         })
             .then((response) => {
                 if (response) {
-                    dispatch(setMoreBooksToState(response.data.items));
+                    dispatch(
+                        setMoreBooksToState(
+                            response.data.items as ISingleBook[]
+                        )
+                    );
                 }
             })
             .catch((e) => console.log(e))
@@ -49,24 +58,46 @@ function BooksSearchResult() {
         ) : (
             <div className="d-flex flex-wrap gap-5 justify-between mt-10">
                 {books &&
-                    books.map((item) => (
-                        <BookCard
-                            key={item.id}
-                            title={item.volumeInfo.title}
-                            authors={item.volumeInfo.authors}
-                            subtitle={item.volumeInfo.subtitle}
-                            categories={item.volumeInfo.categories}
-                            image={
-                                item.volumeInfo.imageLinks?.thumbnail ||
-                                imageNotFound
-                            }
-                        />
-                    ))}
+                    books.map((item) => {
+                        const id: string = uuidv4();
+                        return (
+                            <BookCard
+                                setAboutBookPageContent={() =>
+                                    dispatch(setAboutBookPageContent(item))
+                                }
+                                modifyBooksToReadList={() =>
+                                    booksToReadList.includes(item)
+                                        ? dispatch(
+                                              removeBookFromReadList(item.id)
+                                          )
+                                        : dispatch(setBookToReadList(item))
+                                }
+                                starIcon={
+                                    booksToReadList.includes(item)
+                                        ? "star"
+                                        : "emptyStar"
+                                }
+                                key={id}
+                                title={item.volumeInfo.title}
+                                authors={item.volumeInfo.authors}
+                                subtitle={item.volumeInfo.subtitle}
+                                categories={item.volumeInfo.categories}
+                                image={
+                                    item.volumeInfo.imageLinks?.thumbnail ||
+                                    imageNotFound
+                                }
+                            />
+                        );
+                    })}
             </div>
         );
     return (
         <div className="pb-32 md:px-5">
-            <div>{}</div>
+            <div className="text-center mt-10 text-2xl text-creamy text-opacity-70">
+                {books === null &&
+                    !isLoading &&
+                    "You do not search any book yet"}
+            </div>
             {content}
             <div className="mt-5 text-center">
                 <Button
@@ -77,6 +108,7 @@ function BooksSearchResult() {
                             booksOrder,
                         });
                     }}
+                    hidden={books === null && !isLoading}
                     size="lg"
                     variant="lighter-pink"
                     disabled={isLoading}
