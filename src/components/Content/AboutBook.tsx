@@ -9,7 +9,6 @@ import star from "../../assets/star.png";
 
 function AboutBook() {
     const book = useAppSelector((store) => store.books.aboutBookPageContent);
-    const booksToReadList = useAppSelector((store) => store.books.booksToRead);
 
     const image = book?.volumeInfo.imageLinks?.thumbnail
         ? book?.volumeInfo.imageLinks.thumbnail
@@ -50,31 +49,38 @@ function AboutBook() {
         ));
     }
 
-    console.log(book);
-
     return (
         <>
-            <div className="flex max-[768px]:p-5 flex-col max-[768px]:items-center md:flex-row justify-around md:p-2 md:pt-8 lg:p-10">
-                <div className="w-2/4 md:w-5/12 lg:w-3/12">
+            <div className="flex max-[768px]:p-5 flex-col max-[768px]:items-center md:flex-row justify-around md:p-2 md:pt-8 min-[992px]:p-8">
+                <div className="w-3/4 md:w-5/12 min-[992px]:w-3/12">
                     <Image className="w-full h-full" src={image} />
                 </div>
-                <div className="md:w-6/12 lg:w-2/3 flex flex-col justify-between">
-                    <p className="max-[425px]:text-md max-[768px]:text-center max-[768px]:mt-2 max-[768px]:text-xl md:text-xl lg:text-2xl font-bold text-pink flex justify-between items-start">
+                <div className="md:w-6/12 min-[992px]:w-2/3 flex flex-col justify-between">
+                    <p className="max-[425px]:text-md max-[768px]:text-center max-[768px]:mt-2 max-[768px]:text-xl md:text-xl min-[992px]:text-2xl font-bold text-pink">
                         {book?.volumeInfo.title}
-                        {book && booksToReadList.includes(book) && (
-                            <img className="w-8 max-[425px]:w-6" src={star} />
-                        )}
                     </p>
                     <p className="text-xl text-lightest_pink max-[768px]:text-sm max-[570px]:pl-3 max-[768px]:pl-8">
                         {" "}
-                        Written by: {author}
+                        <span className="text-pink">Written by:</span> {author}
                     </p>
-                    <div className="text-lightest_pink lg:text-xl max-[570px]:pl-3 max-[768px]:pl-8">
-                        <p>Category: {book?.volumeInfo.categories}</p>
-                        <p>Pages: {book?.volumeInfo.pageCount}</p>
-                        <p className="flex items-center ">Rating: {rating}</p>
-                        <p className="text-lightest_pink md:text-md lg:text-lg">
-                            Review: {description}
+                    <div className="text-lightest_pink min-[992px]:text-xl max-[570px]:pl-3 max-[768px]:pl-8">
+                        <p>
+                            {" "}
+                            <span className="text-pink">Category:</span>{" "}
+                            {book?.volumeInfo.categories}
+                        </p>
+                        <p>
+                            {" "}
+                            <span className="text-pink">Pages:</span>{" "}
+                            {book?.volumeInfo.pageCount}
+                        </p>
+                        <p className="flex items-center ">
+                            {" "}
+                            <span className="text-pink">Rating:</span> {rating}
+                        </p>
+                        <p className="text-lightest_pink md:text-md lg:text-xl">
+                            <span className="text-pink">Review:</span>{" "}
+                            {description}
                         </p>
                     </div>
                     <div className="max-[768px]:text-center">
@@ -82,7 +88,7 @@ function AboutBook() {
                             <Link
                                 className="text-black no-underline"
                                 target="_blank"
-                                to={book?.volumeInfo.infoLink}
+                                to={String(book?.volumeInfo.infoLink)}
                             >
                                 Book link
                             </Link>

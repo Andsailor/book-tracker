@@ -61,7 +61,7 @@ function SearchForm() {
             />
             <select
                 onChange={(e) => dispatch(setBooksOrder(e.target.value))}
-                className="min-[992px]:w-26 p-2 h-10 text-sm rounded-md bg-lightest_pink border-1 border-lightest_pink absolute right-24"
+                className="max-[400px]:w-8   min-[992px]:w-26 p-2 h-10 text-sm rounded-md bg-lightest_pink border-1 border-lightest_pink absolute right-24"
             >
                 <option value="relevance">Relevance</option>
                 <option value="newest">Newest</option>

@@ -50,6 +50,8 @@ function BooksSearchResult() {
             .finally(() => dispatch(setSearchStartIndex(searchIndex + 10)));
     }
 
+    console.log(books);
+
     const content =
         isLoading && !isError && !books ? (
             <div className="d-flex justify-center mt-52">
