@@ -8,13 +8,15 @@ import "../styles/bootstrap-custom.css";
 
 function WelcomePage() {
     const navigate = useNavigate();
+
     useEffect(() => {
         if (localStorage.getItem("email") !== null) {
             navigate("/main");
         }
     });
+
     return (
-        <div className="max-[768px]:pt-28 pt-48 text-center">
+        <div className="max-[768px]:pt-28 pt-48 text-center appear">
             <BookIcon />
             <h1 className="text-lightest_pink mt-4">We love Books</h1>
             <p className="text-xl text-lightest_pink">Book-tracking App</p>

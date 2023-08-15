@@ -33,7 +33,7 @@ function App() {
                     <Image
                         className="w-32 hover:drop-shadow-md"
                         src={git}
-                        alt="github link"
+                        alt="github link icon"
                     />
                 </Link>
             </footer>

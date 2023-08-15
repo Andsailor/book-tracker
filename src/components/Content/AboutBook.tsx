@@ -17,7 +17,7 @@ function AboutBook() {
         book?.volumeInfo.authors && book?.volumeInfo.authors.length > 1
             ? book?.volumeInfo.authors.slice(0, 2).join(", ")
             : book?.volumeInfo.authors;
-    const description = book?.searchInfo.textSnippet;
+    const description = book?.searchInfo?.textSnippet;
 
     const rating = book?.volumeInfo.ratingsCount ? (
         <div className="-translate-y-1 ml-2">
@@ -51,7 +51,7 @@ function AboutBook() {
 
     return (
         <>
-            <div className="flex max-[768px]:p-5 flex-col max-[768px]:items-center md:flex-row justify-around md:p-2 md:pt-8 min-[992px]:p-8">
+            <div className="flex max-[768px]:p-5 flex-col max-[768px]:items-center md:flex-row justify-around md:p-2 md:pt-8 min-[992px]:p-8 appear">
                 <div className="w-3/4 md:w-5/12 min-[992px]:w-3/12">
                     <Image className="w-full h-full" src={image} />
                 </div>
@@ -90,7 +90,7 @@ function AboutBook() {
                                 target="_blank"
                                 to={String(book?.volumeInfo.infoLink)}
                             >
-                                Book link
+                                Store page
                             </Link>
                         </Button>
                         <Button

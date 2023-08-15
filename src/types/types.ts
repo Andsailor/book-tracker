@@ -19,6 +19,11 @@ export interface ISingleBook {
     };
 }
 
+export interface IGoogleBookResponse {
+    totalItems: number;
+    items: ISingleBook[];
+}
+
 export interface ISearchParams {
     bookName: string;
     startIndex: number;
@@ -34,4 +39,8 @@ export interface IAboutBookPageContent {
         thumbnail: string;
         smallThumbnail: string;
     };
+}
+
+export interface IAxiosGetBook {
+    data: IGoogleBookResponse;
 }

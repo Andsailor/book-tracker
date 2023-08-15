@@ -10,6 +10,8 @@ export default {
             lightest_pink: "#FCAEAE",
             white: "#FFF",
             black: "#000",
+            grey: "#808080",
+            green: "#ADFF2F",
         },
     },
     plugins: [],

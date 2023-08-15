@@ -33,6 +33,10 @@ body {
     animation: 5s linear infinite book;
 }
 
+.appear {
+    animation: 0.5s linear appear;
+}
+
 @keyframes book {
     0% {
         transform: translateX(-3px);
@@ -44,5 +48,23 @@ body {
 
     100% {
         transform: translateX(-3px);
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0%;
+    }
+    25% {
+        opacity: 25%;
+    }
+    50% {
+        opacity: 50%;
+    }
+    75% {
+        opacity: 75%;
+    }
+    100% {
+        opacity: 100%;
     }
 }

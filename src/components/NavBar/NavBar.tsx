@@ -23,7 +23,10 @@ function NavBar() {
 
     return (
         <>
-            <Navbar expand="lg" className="bg-inherit">
+            <Navbar
+                expand="lg"
+                className="bg-grey bg-opacity-10 rounded-md appear"
+            >
                 <Container>
                     <NavBarLogo />
                     <div className={style}>

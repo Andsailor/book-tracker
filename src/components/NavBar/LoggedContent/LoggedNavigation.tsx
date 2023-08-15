@@ -4,8 +4,6 @@ import { NavLink } from "react-router-dom";
 
 import { Nav } from "react-bootstrap";
 
-import "../../../styles/bootstrap-custom.css";
-
 function LoggedNavigation() {
     const booksToReadList = useAppSelector((store) => store.books.booksToRead);
 
@@ -15,7 +13,7 @@ function LoggedNavigation() {
 
     return (
         <Nav className="min-[992px]:px-2 2xl:px-2 md:pt-4 min-[992px]:pt-0">
-            <Nav.Item className="max-[991px]:mt-2 min-[992px]:my-0 ">
+            <Nav.Item className="max-[991px]:mt-2 min-[992px]:my-0">
                 <NavLink
                     className={({ isActive }) =>
                         isActive ? activeStyle : defaultStyle

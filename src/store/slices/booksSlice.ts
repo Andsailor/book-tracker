@@ -8,10 +8,11 @@ interface IBookSlice {
     books: null | ISingleBook[];
     booksToRead: ISingleBook[];
     booksOrder: string;
+    totalBooksCount: number | null;
     searchStartIndex: number;
+    aboutBookPageContent: ISingleBook | null;
     isLoading: boolean;
     isError: boolean;
-    aboutBookPageContent: ISingleBook | null;
 }
 
 const initialState: IBookSlice = {
@@ -19,10 +20,11 @@ const initialState: IBookSlice = {
     books: null,
     booksToRead: [],
     booksOrder: "relevance",
+    totalBooksCount: null,
     searchStartIndex: 10,
+    aboutBookPageContent: null,
     isLoading: false,
     isError: false,
-    aboutBookPageContent: null,
 };
 
 const bookSlice = createSlice({
@@ -65,6 +67,9 @@ const bookSlice = createSlice({
         setAboutBookPageContent(state, action: PayloadAction<ISingleBook>) {
             state.aboutBookPageContent = action.payload;
         },
+        setTotalBooksCount(state, action: PayloadAction<number>) {
+            state.totalBooksCount = action.payload;
+        },
     },
 });
 
@@ -79,5 +84,6 @@ export const {
     setBookToReadList,
     removeBookFromReadList,
     setAboutBookPageContent,
+    setTotalBooksCount,
 } = bookSlice.actions;
 export default bookSlice.reducer;

@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const useAuth = () => {
-    const [login, setLogin] = useState<string | null>(null);
+    const [userLogin, setUserLogin] = useState<string | null>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        setLogin(JSON.parse(localStorage.getItem("email") as string) as string);
+        setUserLogin(
+            JSON.parse(localStorage.getItem("email") as string) as string
+        );
     }, []);
 
     const logIn = (email: string, id: string) => {
@@ -21,10 +23,10 @@ const useAuth = () => {
     };
 
     return {
-        isLogged: login !== null,
+        isLogged: userLogin !== null,
         logIn,
         logOut,
-        login,
+        userLogin,
     };
 };
 

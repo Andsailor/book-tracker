@@ -13,10 +13,10 @@ interface ILoggedUserBurger {
 
 function LoggedUserBurger({ setHidden }: ILoggedUserBurger) {
     const navigate = useNavigate();
-    const { isLogged, logOut, login } = useAuth();
+    const { isLogged, logOut, userLogin } = useAuth();
 
     const loggedUserEmail = isLogged && (
-        <LoggedUserInfo logOut={logOut} login={login} />
+        <LoggedUserInfo logOut={logOut} login={userLogin} />
     );
 
     const loggedNavigation = isLogged ? <LoggedNavigation /> : null;
@@ -26,7 +26,7 @@ function LoggedUserBurger({ setHidden }: ILoggedUserBurger) {
             <Navbar.Toggle
                 onClick={() => setHidden((value) => (value = !value))}
             />
-            <Navbar.Collapse className="justify-around">
+            <Navbar.Collapse className="max-[992px]:rounded-b-md  max-[992px]:p-2">
                 {loggedNavigation}
                 <Navbar.Text>{loggedUserEmail}</Navbar.Text>
             </Navbar.Collapse>

@@ -7,6 +7,7 @@ import {
     setBooksToState,
     setBookNameToState,
     setBooksOrder,
+    setTotalBooksCount,
 } from "../../store/slices/booksSlice";
 
 import { Form, Button } from "react-bootstrap";
@@ -28,15 +29,26 @@ function SearchForm() {
             startIndex: params.startIndex,
             booksOrder: params.booksOrder,
         })
-            .then(
-                (response) =>
-                    response &&
+            .then((response) => {
+                if (response && "items" in response.data) {
                     dispatch(
-                        setBooksToState(response.data.items as ISingleBook[])
-                    )
-            )
-            .catch((e) => console.log(e))
-            .finally(() => setBookName(""));
+                        setBooksToState(response?.data.items as ISingleBook[])
+                    );
+                    if ("totalItems" in response.data) {
+                        dispatch(
+                            setTotalBooksCount(
+                                Number(response?.data.totalItems)
+                            )
+                        );
+                    }
+                }
+            })
+            .catch(() => {
+                navigate("/error");
+            })
+            .finally(() => {
+                setBookName("");
+            });
     }
 
     return (

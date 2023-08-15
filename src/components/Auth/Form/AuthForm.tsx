@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import useValidation from "../../../hooks/useValidation.hook";
 
 import RegButton from "./RegButton";
 import Button from "react-bootstrap/Button";
@@ -8,9 +7,6 @@ import Form from "react-bootstrap/Form";
 import BookIcon from "../../BookIcon/BookIcon";
 
 import "../../../styles/bootstrap-custom.css";
-
-//! TODO
-//? 2. Валидировать форму
 
 interface IFormProps {
     title: string;
@@ -22,11 +18,10 @@ function AuthForm({ title, handleSubmit, pageTitle }: IFormProps) {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const { validated, setValidated } = useValidation();
+    const [validated, setValidated] = useState(false);
 
     return (
-        <div className="max-[1024px]:pt-12 pt-44 max-w-sm m-auto">
+        <div className="max-[1024px]:pt-12 pt-44 max-w-sm m-auto appear">
             <BookIcon />
             <h1 className="text-center mt-3 text-lightest_pink">{pageTitle}</h1>
             <Form
@@ -39,14 +34,17 @@ function AuthForm({ title, handleSubmit, pageTitle }: IFormProps) {
             >
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label className="text-creamy">
-                        Email address
+                        Email address. <br />
+                        <span className="text-light_pink">
+                            Test: test@gmail.com
+                        </span>
                     </Form.Label>
                     <Form.Control
                         className="valid:bg-creamy"
                         required
                         value={email}
+                        onFocus={() => setValidated(true)}
                         onChange={(e) => {
-                            setValidated(true);
                             setEmail(e.target.value);
                         }}
                         size="lg"
@@ -55,13 +53,18 @@ function AuthForm({ title, handleSubmit, pageTitle }: IFormProps) {
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label className="text-creamy">Password</Form.Label>
+                    <Form.Label className="text-creamy">
+                        Password. <br />
+                        <span className="text-light_pink">Test: qwerty</span>
+                    </Form.Label>
                     <Form.Control
                         className="valid:bg-creamy"
                         required
                         value={password}
-                        onChange={(e) => {
+                        onFocus={() => {
                             setValidated(true);
+                        }}
+                        onChange={(e) => {
                             setPassword(e.target.value);
                         }}
                         size="lg"

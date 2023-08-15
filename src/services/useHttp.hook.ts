@@ -1,15 +1,13 @@
 import axios from "axios";
-import { ISingleBook, ISearchParams } from "../types/types";
-import { setIsLoading, setIsError } from "../store/slices/booksSlice";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/store";
 
-interface IAxiosGetBook {
-    data: {
-        items: ISingleBook[];
-    };
-}
+import { setIsLoading } from "../store/slices/booksSlice";
+
+import { IAxiosGetBook, ISearchParams } from "../types/types";
 
 export const useHttp = () => {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const instance = axios.create({
         baseURL: `https://www.googleapis.com/books/v1/volumes`,
@@ -30,8 +28,7 @@ export const useHttp = () => {
                 return response;
             }
         } catch (e) {
-            dispatch(setIsError(true));
-            console.log(e);
+            navigate("/error");
         }
     };
 

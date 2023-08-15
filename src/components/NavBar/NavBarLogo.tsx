@@ -19,8 +19,9 @@ function NavBarLogo() {
                     We
                 </span>
                 <Image
-                    className=" min-[320px]:w-11 min-[320px]:h-9 min-[420px]:w-11 lg:w-10 lg:h-8"
+                    className="min-[320px]:w-11 min-[320px]:h-9 min-[420px]:w-11 lg:w-10 lg:h-8"
                     src={heart}
+                    alt="we love books main logo"
                 />
                 <span className="ml-2 min-[768px]:hidden min-[1200px]:block">
                     Books

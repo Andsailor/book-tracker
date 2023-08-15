@@ -17,7 +17,7 @@ function BooksToRead() {
     const dispatch = useAppDispatch();
 
     return (
-        <div className="d-flex flex-wrap gap-5 justify-between mt-10">
+        <div className="mt-10">
             {booksToReadList.length > 0 ? (
                 booksToReadList.map((item) => {
                     const id: string = uuidv4();
@@ -50,7 +50,7 @@ function BooksToRead() {
                     );
                 })
             ) : (
-                <h1 className="m-auto text-creamy text-opacity-70 text-2xl">
+                <h1 className="m-auto text-creamy text-opacity-70 max-[500px]:text-lg text-2xl text-center">
                     You do not track any book yet
                 </h1>
             )}
