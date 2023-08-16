@@ -17,7 +17,7 @@ function BooksToRead() {
     const dispatch = useAppDispatch();
 
     return (
-        <div className="mt-10">
+        <div className="mt-10 mb-20">
             {booksToReadList.length > 0 ? (
                 booksToReadList.map((item) => {
                     const id: string = uuidv4();
