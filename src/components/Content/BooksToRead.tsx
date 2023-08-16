@@ -1,8 +1,8 @@
 import { useAppSelector, useAppDispatch } from "../../store/store";
 import { v4 as uuidv4 } from "uuid";
 
-import { removeBookFromReadList } from "../../store/slices/booksSlice";
 import {
+    removeBookFromReadList,
     setBookToReadList,
     setAboutBookPageContent,
 } from "../../store/slices/booksSlice";

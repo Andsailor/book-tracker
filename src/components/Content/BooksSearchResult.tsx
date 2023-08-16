@@ -1,5 +1,8 @@
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { useHttp } from "../../services/useHttp.hook";
+import { v4 as uuidv4 } from "uuid";
+import { TransitionGroup } from "react-transition-group";
+
 import {
     setMoreBooksToState,
     setSearchStartIndex,
@@ -7,8 +10,6 @@ import {
     removeBookFromReadList,
     setAboutBookPageContent,
 } from "../../store/slices/booksSlice";
-import { v4 as uuidv4 } from "uuid";
-import { TransitionGroup } from "react-transition-group";
 
 import { Spinner, Button } from "react-bootstrap";
 import BookCard from "./BookCard/BookCard";

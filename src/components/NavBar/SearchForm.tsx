@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { useNavigate } from "react-router-dom";
-import type { ISearchParams, ISingleBook } from "../../types/types";
+import { useHttp } from "../../services/useHttp.hook";
 
 import {
     setBooksToState,
@@ -11,7 +11,8 @@ import {
 } from "../../store/slices/booksSlice";
 
 import { Form, Button } from "react-bootstrap";
-import { useHttp } from "../../services/useHttp.hook";
+
+import type { ISearchParams, ISingleBook } from "../../types/types";
 
 function SearchForm() {
     const [bookName, setBookName] = useState<string>("");
