@@ -108,7 +108,7 @@ function BooksSearchResult() {
             </div>
         );
     return (
-        <div className="pb-32 md:px-5 px-0 sm:px-10">
+        <div className="pb-24 md:px-5 px-0 sm:px-10">
             {books && (
                 <div className="text-left text-light_pink text-xl mt-3">
                     Books found: {totalBooksCount}

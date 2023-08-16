@@ -51,7 +51,7 @@ function AboutBook() {
 
     return (
         <>
-            <div className="flex max-[768px]:p-5 flex-col max-[768px]:items-center md:flex-row justify-around md:p-2 md:pt-8 min-[992px]:p-8 appear">
+            <div className="mb-10 flex max-[768px]:p-5 flex-col max-[768px]:items-center md:flex-row justify-around md:p-2 md:pt-8 min-[992px]:p-8 appear">
                 <div className="w-3/4 md:w-5/12 min-[992px]:w-3/12">
                     <Image className="w-full h-full" src={image} />
                 </div>
